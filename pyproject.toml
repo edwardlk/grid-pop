@@ -1,9 +1,14 @@
 [tool.poetry]
 name = "grid-pop"
 version = "0.1.0"
-description = ""
+description = "Accessing SEDAC's Gridded Population of the World data."
 authors = ["Ed K <e.kramkowski@gmail.com>"]
 readme = "README.md"
+repository = "https://github.com/edwardlk/grid-pop"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3"
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
