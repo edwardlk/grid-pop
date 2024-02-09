@@ -26,8 +26,7 @@ class Points:
 
     resolution: {'2pt5-min', '30-sec', '15-min', '30-min', '1-deg'}
         Data set resolution, either native 30 arc-second, 2.5 arc-minute, 15 arc-minute, 
-        30 arc-minute, or 1 degree. Note that the highest resolution (30 arc-second) will
-        have a file size > 100 MB.
+        30 arc-minute, or 1 degree.
 
     year: {2020, 2000, 2005, 2010, 2015}
         Estimate year
@@ -72,7 +71,8 @@ class Points:
 
         Parameters
         ----------
-
+        point
+            Lat-lon tuple.
 
         Raises
         ------
@@ -85,7 +85,7 @@ class Points:
 
         if (abs(lat) > 90) or (abs(lon) > 180) or (len(point) != 2):
             raise ValueError(
-                f'Invalid lat/lon point: ({lat}, {lon}) is not a correct coordinate'
+                f'Invalid lat/lon point: \'{point}\' is not a correct coordinate.'
             )
         
     @staticmethod
@@ -93,13 +93,20 @@ class Points:
             gpw_array: np.ndarray, ll_point: tuple
         ) -> float:
         '''
+        Determines the cell in which a lat-lon point is located, and returns 
+        the value of that cell from the givin array.
 
         Parameters
         ----------
+        gpw_array
+            The data array from which lat-lon values are to be returned.
 
+        ll_point
+            The lat-lon point of interest
 
         Returns
         -------
+            The numerical value from the gpw_array.
 
 
         '''
@@ -115,14 +122,16 @@ class Points:
 
     def _fetch_population_data(self) -> None:
         '''
+        Loads the appropriate data arrays given the \'data_type\' selected during initialization.
 
         Parameters
         ----------
+            None
 
 
         Returns
         -------
-
+            None
 
         '''
         if (self.data_type == 'density') | (self.data_type == 'both'):
@@ -140,13 +149,24 @@ class Points:
             self, ll_points: list|tuple, clear_points: bool = False
         ) -> dict:
         '''
+        Adds the given point or set of points to the \'points\' list, and 
+
 
         Parameters
         ----------
+        ll_points: list|tuple
+            A single lat-lon point, or a list of lat-lon points.
 
+        clear_points: bool, default=False
+            Removes the current set of stored lat-lon points before
+            appending the new values from \'ll_points\'.
 
         Returns
         -------
+        result: dict
+            An updated dictionary with the current list of points, 
+            population density values (if applicable), and 
+            population count values (if applicable).
 
 
         '''
