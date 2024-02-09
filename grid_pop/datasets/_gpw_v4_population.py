@@ -96,7 +96,9 @@ def _load_file_part(
     '''
     '''
     with zip_archive.open(data_file) as data_file:
-        data = np.loadtxt(data_file, skiprows=6)
+        data = np.loadtxt(
+            data_file, skiprows=6, dtype=np.float32
+        )
 
     return data
 
@@ -125,8 +127,8 @@ def _load_zip(
         data_file = next(x for x in zip_contents.keys() if x[-3:] == format)
 
         with ZipFile(file_save_path) as zip_archive:
-            with zip_archive.open(data_file) as data_file:
-                data = np.loadtxt(data_file, skiprows=6)
+            data = _load_file_part(zip_archive, data_file)
+
     else:
         file_list = [x for x in zip_contents.keys() if x[-3:] == format]
         file_list.sort()
