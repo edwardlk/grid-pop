@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "grid-pop"
-version = "0.1.0"
+version = "0.1.1"
 description = "Accessing SEDAC's Gridded Population of the World data."
 authors = ["Ed K <e.kramkowski@gmail.com>"]
 readme = "README.md"
